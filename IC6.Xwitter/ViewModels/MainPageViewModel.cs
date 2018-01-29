@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace IC6.Xwitter.ViewModels
@@ -12,14 +13,34 @@ namespace IC6.Xwitter.ViewModels
     internal class MainPageViewModel : INotifyPropertyChanged
     {
         public Command _authenticateCommand;
+        private readonly ILoginStore _loginStoreService;
         private IAuthorizer _auth;
+        private ILinqToTwitterAuthorizer _authSvc;
         private bool _isRefreshing;
         private string _newTweetText;
         private Command _refreshTimeline, _sendTweet;
         private List<Tweet> _tweets;
 
+        private UserSecrets _userSecrets;
         private string consumerKey = "rhYsgslO2JWW120sPCepSq6Uq";
         private string consumerSecret = "vJNFjYdCv8HO0M6mI8UTcqWdgdR9qBOEDXcxmgtV20ZjMOeZwW";
+
+        public MainPageViewModel(ILoginStore loginStoreSvc, ILinqToTwitterAuthorizer authorizeSvc)
+        {
+            _loginStoreService = loginStoreSvc;
+
+            _userSecrets = loginStoreSvc.GetSecrets();
+
+            _authSvc = authorizeSvc;
+
+            if (_userSecrets != null)
+            {
+                _auth = _authSvc.GetAuthorizer(consumerKey,
+                        consumerSecret,
+                        _userSecrets.OAuthToken,
+                        _userSecrets.OAuthSecret);
+            }
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -27,13 +48,15 @@ namespace IC6.Xwitter.ViewModels
         {
             get
             {
-                return _authenticateCommand ?? (_authenticateCommand = new Command(() => { InitAuthentication(); }));
+                return _authenticateCommand ?? (
+                    _authenticateCommand = new Command(() => { InitAuthentication(); })
+                    );
             }
         }
 
         public bool IsAuthenticated
         {
-            get { return _auth != null; }
+            get { return _userSecrets != null; }
         }
 
         public bool IsRefreshing
@@ -61,6 +84,7 @@ namespace IC6.Xwitter.ViewModels
                 SendTweet.ChangeCanExecute();
             }
         }
+
         public Command RefreshTimeline
         {
             get
@@ -81,7 +105,7 @@ namespace IC6.Xwitter.ViewModels
                         }
 
                         IsRefreshing = false;
-                    }, () => { return IsAuthenticated; });
+                    }, () => { return _loginStoreService.GetSecrets() != null; });
                 }
 
                 return _refreshTimeline;
@@ -134,11 +158,13 @@ namespace IC6.Xwitter.ViewModels
 
         public void InitAuthentication()
         {
+            if (_userSecrets != null) return;
+
             var oauth = new Xamarin.Auth.OAuth1Authenticator(consumerKey, consumerSecret,
                  new Uri("https://api.twitter.com/oauth/request_token"),
                   new Uri("https://api.twitter.com/oauth/authorize"),
                   new Uri("https://api.twitter.com/oauth/access_token"),
-                  new Uri("http://127.0.0.1"));
+                  new Uri("http://127.0.0.1/"));
 
             oauth.Completed += Oauth_Completed_GetAuthorizer;
 
@@ -160,16 +186,19 @@ namespace IC6.Xwitter.ViewModels
                 propChangedHandler(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private async void Oauth_Completed_GetAuthorizer(object sender, Xamarin.Auth.AuthenticatorCompletedEventArgs e)
+        private void Oauth_Completed_GetAuthorizer(object sender, Xamarin.Auth.AuthenticatorCompletedEventArgs e)
         {
             try
             {
-                var authSvc = DependencyService.Get<ILinqToTwitterAuthorizer>();
-
-                _auth = authSvc.GetAuthorizer(consumerKey,
+                _auth = _authSvc.GetAuthorizer(consumerKey,
                     consumerSecret,
                     e.Account.Properties["oauth_token"],
                     e.Account.Properties["oauth_token_secret"]);
+
+                _loginStoreService.SetSecrets(
+                     e.Account.Properties["oauth_token"],
+                     e.Account.Properties["oauth_token_secret"]
+                 );
 
                 RefreshTimeline.ChangeCanExecute();
 
@@ -181,7 +210,7 @@ namespace IC6.Xwitter.ViewModels
             }
         }
 
-        private async System.Threading.Tasks.Task RefreshAsync()
+        private async Task RefreshAsync()
         {
             await _auth.AuthorizeAsync();
 

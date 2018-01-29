@@ -16,8 +16,8 @@ namespace IC6.Xwitter.Droid
     [IntentFilter(
      new[] { Intent.ActionView },
      Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
-     DataSchemes = new[] { "<insert custom URL here>" },
-     DataPath = "/oauth2redirect")]
+     DataSchemes = new[] { "http://com.companyname.IC6.Xwitter/callback" },
+     DataPath = "oauth_token")]
     public class CustomUrlSchemeInterceptorActivity : Activity
     {
         protected override void OnCreate(Bundle savedInstanceState)

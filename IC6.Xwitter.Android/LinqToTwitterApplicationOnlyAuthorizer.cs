@@ -1,5 +1,4 @@
-﻿using IC6.Xwitter;
-using IC6.Xwitter.Droid;
+﻿using IC6.Xwitter.Droid;
 using LinqToTwitter;
 
 [assembly: Xamarin.Forms.Dependency(typeof(LinqToTwitterDroidAuthorizer))]
@@ -13,16 +12,12 @@ namespace IC6.Xwitter.Droid
         public IAuthorizer GetAuthorizer(string consumerKey, string consumerSecret)
         {
             return new ApplicationOnlyAuthorizer()
-
             {
                 CredentialStore = new InMemoryCredentialStore
-
                 {
                     ConsumerKey = consumerKey,
 
                     ConsumerSecret = consumerSecret,
-
-
                 },
             };
         }

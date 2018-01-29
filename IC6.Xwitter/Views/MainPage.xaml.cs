@@ -9,7 +9,7 @@ namespace IC6.Xwitter.Views
         {
             InitializeComponent();
 
-            BindingContext = new MainPageViewModel();
+            BindingContext = new MainPageViewModel(DependencyService.Get<ILoginStore>(), DependencyService.Get<ILinqToTwitterAuthorizer>());
         }
 
         private MainPageViewModel ViewModel
@@ -24,13 +24,13 @@ namespace IC6.Xwitter.Views
             if (ViewModel == null)
                 return;
 
-            if (ViewModel.IsAuthenticated)
+            if (!ViewModel.IsAuthenticated)
             {
-                ViewModel.RefreshTimeline.Execute(null);
+                ViewModel.Authenticate.Execute(null);
             }
             else
             {
-                ViewModel.Authenticate.Execute(null);
+                ViewModel.RefreshTimeline.Execute(null);
             }
         }
     }
