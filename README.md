@@ -1,18 +1,17 @@
 # Introduction
-This project handles the creation of a simple Twitter client built with Xamarin.Forms called *Xwitter* (XamarinTwitter).
+This repo contains a simple Xamarin.Forms app (Android version only) to access Twitter.
+With this app you can read your timeline and post a tweet (text only).
+
 
 # Getting Started
-TODO: Guide users through getting your code up and running on their own system. In this section you can talk about:
-1.	Installation process
-2.	Software dependencies
-3.	Latest releases
-4.	API references
+You'll need Visual Studio 2017 (Community Edition is fine) with the Mobile Development Workflow installed
+
+
+To get started clone the repository.
+
 
 # Build and Test
-TODO: Describe and show how to build your code and run the tests. 
+To build the app you need Android SDK. You can manage Android SDKs with Visual Studio
 
 # Contribute
-TODO: Explain how other users and developers can contribute to make your code better. 
-
-If you want to learn more about creating good readme files then refer the following [guidelines](https://www.visualstudio.com/en-us/docs/git/create-a-readme). You can also seek inspiration from the below readme files:
-- [Michele Ferracin GitHub](https://github.com/phenixita) 
+Fork the project and do a pull-request.
