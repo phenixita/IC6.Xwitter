@@ -225,7 +225,7 @@ namespace IC6.Xwitter.ViewModels
                            ScreenName = tweet.User.ScreenNameResponse,
                            Text = tweet.Text,
                            ImageUrl = tweet.RetweetedStatus != null && tweet.RetweetedStatus.User != null ?
-                                      tweet.RetweetedStatus.User.ProfileImageUrl.Replace("http://", "https://") : null
+                                      tweet.RetweetedStatus.User.ProfileImageUrl.Replace("http://", "https://") : tweet.User.ProfileImageUrl
                        }).ToListAsync();
 
                 Tweets = new List<Tweet>(srch);
