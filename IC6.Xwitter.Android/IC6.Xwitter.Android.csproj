@@ -71,7 +71,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomUrlSchemeInterceptorActivity.cs" />
-    <Compile Include="LinqToTwitterApplicationOnlyAuthorizer.cs" />
+    <Compile Include="LinqToTwitterDroidAuthorizer.cs" />
     <Compile Include="LoginStore.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
