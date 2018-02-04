@@ -70,7 +70,6 @@
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="25.4.0.2" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomUrlSchemeInterceptorActivity.cs" />
     <Compile Include="LinqToTwitterDroidAuthorizer.cs" />
     <Compile Include="LoginStore.cs" />
     <Compile Include="MainActivity.cs" />

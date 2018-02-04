@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IC6.Xwitter", "IC6.Xwitter\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IC6.Xwitter.Android", "IC6.Xwitter.Android\IC6.Xwitter.Android.csproj", "{C3B1BC78-C9BE-42F2-9388-AFBDFBCB7AD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IC6.Xwitter.UWP", "..\NC\IC6.Xwitter\IC6.Xwitter\IC6.Xwitter.UWP\IC6.Xwitter.UWP.csproj", "{4008C882-9F17-48E8-9EA3-0CB76CED8865}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,26 +59,6 @@ Global
 		{C3B1BC78-C9BE-42F2-9388-AFBDFBCB7AD1}.Release|x86.ActiveCfg = Release|Any CPU
 		{C3B1BC78-C9BE-42F2-9388-AFBDFBCB7AD1}.Release|x86.Build.0 = Release|Any CPU
 		{C3B1BC78-C9BE-42F2-9388-AFBDFBCB7AD1}.Release|x86.Deploy.0 = Release|Any CPU
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Debug|ARM.ActiveCfg = Debug|ARM
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Debug|ARM.Build.0 = Debug|ARM
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Debug|ARM.Deploy.0 = Debug|ARM
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Debug|x64.ActiveCfg = Debug|x64
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Debug|x64.Build.0 = Debug|x64
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Debug|x64.Deploy.0 = Debug|x64
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Debug|x86.ActiveCfg = Debug|x86
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Debug|x86.Build.0 = Debug|x86
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Debug|x86.Deploy.0 = Debug|x86
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Release|Any CPU.ActiveCfg = Release|x86
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Release|ARM.ActiveCfg = Release|ARM
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Release|ARM.Build.0 = Release|ARM
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Release|ARM.Deploy.0 = Release|ARM
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Release|x64.ActiveCfg = Release|x64
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Release|x64.Build.0 = Release|x64
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Release|x64.Deploy.0 = Release|x64
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Release|x86.ActiveCfg = Release|x86
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Release|x86.Build.0 = Release|x86
-		{4008C882-9F17-48E8-9EA3-0CB76CED8865}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
