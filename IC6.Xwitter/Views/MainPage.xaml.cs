@@ -9,7 +9,7 @@ namespace IC6.Xwitter.Views
         {
             InitializeComponent();
 
-            BindingContext = new MainPageViewModel(DependencyService.Get<ILoginStore>(), DependencyService.Get<ILinqToTwitterAuthorizer>());
+            BindingContext = new MainPageViewModel(new LoginStore(), new LinqToTwitterAuthorizer());
         }
 
         private MainPageViewModel ViewModel

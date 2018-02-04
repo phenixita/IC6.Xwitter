@@ -1,4 +1,5 @@
 ﻿using System;
+
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
@@ -18,9 +19,10 @@ namespace IC6.Xwitter.Droid
 
             base.OnCreate(bundle);
 
+            global::Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, bundle);
+
             global::Xamarin.Forms.Forms.Init(this, bundle);
 
-            global::Xamarin.Auth.Presenters.XamarinAndroid.AuthenticationConfiguration.Init(this, bundle);
 
             LoadApplication(new App());
         }

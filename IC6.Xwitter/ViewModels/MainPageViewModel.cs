@@ -120,20 +120,20 @@ namespace IC6.Xwitter.ViewModels
                 {
                     _sendTweet = new Command(
                     async () =>
+                    {
+                        using (var ctx = new TwitterContext(_auth))
                         {
-                            using (var ctx = new TwitterContext(_auth))
-                            {
-                                await ctx.TweetAsync(NewTweetText);
-                            }
+                            await ctx.TweetAsync(NewTweetText);
+                        }
 
-                            NewTweetText = "";
+                        NewTweetText = "";
 
-                            RefreshTimeline.Execute(null);
-                        },
+                        RefreshTimeline.Execute(null);
+                    },
                     () =>
-                        {
-                            return NewTweetText?.Length > 0 && _auth != null;
-                        });
+                    {
+                        return NewTweetText?.Length > 0 && _auth != null;
+                    });
                 }
 
                 return _sendTweet;
@@ -161,10 +161,10 @@ namespace IC6.Xwitter.ViewModels
             if (_userSecrets != null) return;
 
             var oauth = new Xamarin.Auth.OAuth1Authenticator(consumerKey, consumerSecret,
-                 new Uri("https://api.twitter.com/oauth/request_token"),
-                  new Uri("https://api.twitter.com/oauth/authorize"),
-                  new Uri("https://api.twitter.com/oauth/access_token"),
-                  new Uri("http://127.0.0.1/"));
+                  new Uri("https://api.twitter.com/oauth/request_token"),
+                   new Uri("https://api.twitter.com/oauth/authorize"),
+                   new Uri("https://api.twitter.com/oauth/access_token"),
+                   new Uri("http://127.0.0.1/"));
 
             oauth.Completed += Oauth_Completed_GetAuthorizer;
 
@@ -186,28 +186,23 @@ namespace IC6.Xwitter.ViewModels
                 propChangedHandler(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        private void Oauth_Completed_GetAuthorizer(object sender, Xamarin.Auth.AuthenticatorCompletedEventArgs e)
+        private async void Oauth_Completed_GetAuthorizer(object sender, Xamarin.Auth.AuthenticatorCompletedEventArgs e)
         {
-            try
-            {
-                _auth = _authSvc.GetAuthorizer(consumerKey,
+
+            _auth = _authSvc.GetAuthorizer(consumerKey,
                     consumerSecret,
                     e.Account.Properties["oauth_token"],
                     e.Account.Properties["oauth_token_secret"]);
 
-                _loginStoreService.SetSecrets(
-                     e.Account.Properties["oauth_token"],
-                     e.Account.Properties["oauth_token_secret"]
-                 );
+            await _loginStoreService.SetSecretsAsync(
+                 e.Account.Properties["oauth_token"],
+                 e.Account.Properties["oauth_token_secret"]
+             );
 
-                RefreshTimeline.ChangeCanExecute();
+            RefreshTimeline.ChangeCanExecute();
 
-                RefreshTimeline.Execute(null);
-            }
-            catch (Exception ex)
-            {
-                System.Diagnostics.Debug.WriteLine(ex.Message);
-            }
+            RefreshTimeline.Execute(null);
+
         }
 
         private async Task RefreshAsync()

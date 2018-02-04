@@ -5,7 +5,7 @@ using IC6.Xwitter.Droid;
 [assembly: Xamarin.Forms.Dependency(typeof(LoginStore))]
 namespace IC6.Xwitter.Droid
 {
-    public class LoginStore : ILoginStore
+    public class LoginStore 
     {
         private enum OAuth
         {
