@@ -10,7 +10,9 @@ With this app you can read your timeline and post a tweet (text only).
 # Know issues and limitations
 
 The UWP flavor of the app crashes at the moment of this writing because of this [known bug of Xamarin.Auth](https://github.com/xamarin/Xamarin.Auth/issues/236).
+
 The iOS version of the app is not tested.
+
 If you encouter the followin error or random deployment errors you need to delete bin and obj folder of the project and redeploy. Running Visual Studio 2017 as admin may help.
 
 > Could not locate c:\temp\IC6.Xwitter\IC6.Xwitter\packages.config.  Ensure that this project has Microsoft.Bcl.Build installed and packages.config is located next to the project file. 2 IC6.Xwitter.Android 
